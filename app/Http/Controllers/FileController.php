@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\FileResource;
+use App\Models\File;
 use Aws\S3\S3Client;
 use Aws\S3\PostObjectV4;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class FileController extends Controller
 {
@@ -40,5 +42,17 @@ class FileController extends Controller
             'attributes' => $postObject->getFormAttributes(),
             'form_input' => $postObject->getFormInputs(),
         ];
+    }
+
+    public function store()
+    {
+        request()->validate([
+            'path' => Rule::unique('files', 'path')
+        ]);
+        return FileResource::make(auth()->user()->files()->firstOrCreate([
+            'name' => request('name'),
+            'size' => request('size'),
+            'path' => request('path'),
+        ]));
     }
 }

@@ -21,7 +21,8 @@ class FileFactory extends Factory
             'uuid' => $this->faker->unique()->uuid(),
             'name' => $this->faker->word() . '.jpg',
             'user_id' => User::factory(),
-            'size' => 50000
+            'size' => 50000,
+            'path' => 'files/' . $this->faker->unique()->word() . '.png'
         ];
     }
 }
