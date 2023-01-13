@@ -14,7 +14,7 @@ class FileController extends Controller
 {
     public function index()
     {
-        return FileResource::collection(auth()->user()->files);
+        return FileResource::collection(auth()->user()->files()->latest()->get());
     }
 
     public function signed()
