@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', LoginController::class);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
-    Route::post('/login', LoginController::class);
     Route::post('/logout', LogoutController::class);
     Route::get('/files', [FileController::class, 'index']);
+    Route::post('/files/signed', [FileController::class, 'signed']);
 });
