@@ -27,5 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', LogoutController::class);
     Route::get('/files', [FileController::class, 'index']);
     Route::post('/files', [FileController::class, 'store']);
+    Route::delete('/files/{file:uuid}', [FileController::class, 'destroy']);
     Route::post('/files/signed', [FileController::class, 'signed']);
 });

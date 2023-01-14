@@ -55,4 +55,10 @@ class FileController extends Controller
             'path' => request('path'),
         ]));
     }
+
+    public function destroy(File $file)
+    {
+        $this->authorize('delete', $file);
+        return $file->delete();
+    }
 }
