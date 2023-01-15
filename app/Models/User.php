@@ -49,6 +49,7 @@ class User extends Authenticatable
         return $this->hasMany(File::class);
     }
 
+    //when user register,default will be free plan
     public function plan()
     {
         return $this->hasOneThrough(Plan::class, Subscription::class, 'user_id', 'stripe_id', 'id', 'stripe_plan')
