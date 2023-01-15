@@ -22,6 +22,7 @@ Route::post('/login', LoginController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserController::class, 'show']);
+    Route::get('/user/usage', [UserController::class, 'usage']);
 
     Route::post('/logout', LogoutController::class);
     Route::get('/files', [FileController::class, 'index']);

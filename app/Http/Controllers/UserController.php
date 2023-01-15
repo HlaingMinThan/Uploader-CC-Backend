@@ -11,4 +11,11 @@ class UserController extends Controller
     {
         return UserResource::make($request->user());
     }
+
+    public function usage(Request $request)
+    {
+        return [
+            'data' => $request->user()->usage()
+        ];
+    }
 }

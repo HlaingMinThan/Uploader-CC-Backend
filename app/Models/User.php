@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(File::class);
     }
 
+    public function usage()
+    {
+        return $this->files->sum('size');
+    }
+
     //when user register,default will be free plan
     public function plan()
     {
