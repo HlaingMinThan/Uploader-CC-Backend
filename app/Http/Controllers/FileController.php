@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\FileResource;
 use App\Models\File;
+use App\Rules\WithinUsage;
 use Aws\S3\S3Client;
 use Aws\S3\PostObjectV4;
 use Illuminate\Http\Request;
@@ -19,6 +20,11 @@ class FileController extends Controller
 
     public function signed()
     {
+        request()->validate([
+            'name' => 'required',
+            'extension' => 'required',
+            'size' => ['required', new WithinUsage]
+        ]);
         $filename = md5(request('name') . microtime()) . '.' . request('extension'); //asfasdfasf.jpg
         $s3Client = new S3Client([
             'version' => 'latest',
