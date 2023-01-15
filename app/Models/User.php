@@ -54,6 +54,6 @@ class User extends Authenticatable
     {
         return $this->hasOneThrough(Plan::class, Subscription::class, 'user_id', 'stripe_id', 'id', 'stripe_plan')
             ->whereNull('subscriptions.ends_at') //when subscription ended, user shouldn't have premium plan exists
-            ->withDefault(Plan::where('buyable', false)->first()->toArray());
+            ->withDefault(Plan::free()->toArray());
     }
 }
