@@ -4,6 +4,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\StripePaymentIntentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/files', [FileController::class, 'store']);
     Route::delete('/files/{file:uuid}', [FileController::class, 'destroy']);
     Route::post('/files/signed', [FileController::class, 'signed']);
+
+    Route::get('/subscriptions/intent', StripePaymentIntentController::class);
 });
