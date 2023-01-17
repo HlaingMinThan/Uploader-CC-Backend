@@ -57,7 +57,7 @@ class User extends Authenticatable
     //when user register,default will be free plan
     public function plan()
     {
-        return $this->hasOneThrough(Plan::class, Subscription::class, 'user_id', 'stripe_id', 'id', 'stripe_plan')
+        return $this->hasOneThrough(Plan::class, Subscription::class, 'user_id', 'stripe_id', 'id', 'stripe_price')
             ->whereNull('subscriptions.ends_at') //when subscription ended, user shouldn't have premium plan exists
             ->withDefault(Plan::free()->toArray());
     }
