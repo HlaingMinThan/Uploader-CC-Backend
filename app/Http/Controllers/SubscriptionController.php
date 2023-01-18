@@ -12,4 +12,16 @@ class SubscriptionController extends Controller
         $plan = Plan::whereSlug($request->plan)->first();
         auth()->user()->newSubscription('default', $plan->stripe_id)->create($request->paymentMethodId);
     }
+
+    public function update(Request $request)
+    {
+        $plan = Plan::whereSlug($request->plan)->first();
+
+        //if plan is free,cancel the subscription
+        if (!$plan->buyable) {
+            auth()->user()->subscription('default')->cancel();
+            return;
+        }
+        auth()->user()->subscription('default')->swapAndInvoice($plan->stripe_id);
+    }
 }

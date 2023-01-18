@@ -36,4 +36,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/subscriptions/intent', StripePaymentIntentController::class);
     Route::post('/subscriptions/store', [SubscriptionController::class, 'store']);
+    Route::patch('/subscriptions/swap', [SubscriptionController::class, 'update']);
 });
