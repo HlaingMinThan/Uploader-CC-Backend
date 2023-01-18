@@ -62,7 +62,7 @@ class User extends Authenticatable
             ->withDefault(Plan::free()->toArray());
     }
 
-    public function canDowngrade($plan)
+    public function canSwap($plan)
     {
         return $this->usage() <= $plan->storage && $this->plan->slug !== $plan->slug;
     }
