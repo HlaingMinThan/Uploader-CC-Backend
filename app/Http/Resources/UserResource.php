@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'plan' => PlanResource::make($this->plan),
             'subscribed' => $this->subscribed('default'),
-            'ends_at' => $this->subscription('default')->ends_at->format('D, d M Y'),
+            'ends_at' => $this->subscription('default')?->ends_at?->format('D, d M Y'),
             'created_at'  => $this->created_at
         ];
     }
