@@ -64,6 +64,6 @@ class User extends Authenticatable
 
     public function canDowngrade($plan)
     {
-        return $this->usage() <= $plan->storage;
+        return $this->usage() <= $plan->storage && $this->plan->slug !== $plan->name;
     }
 }
