@@ -19,7 +19,8 @@ class PlanResource extends JsonResource
             'slug' => $this->slug,
             'price' => $this->price,
             'storage' => $this->storage,
-            'free' => !$this->buyable
+            'free' => !$this->buyable,
+            'can_downgrade' => $request->user()->canDowngrade($this)
         ];
     }
 }

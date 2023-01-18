@@ -61,4 +61,9 @@ class User extends Authenticatable
             ->whereNull('subscriptions.ends_at') //when subscription ended, user shouldn't have premium plan exists
             ->withDefault(Plan::free()->toArray());
     }
+
+    public function canDowngrade($plan)
+    {
+        return $this->usage() <= $plan->storage;
+    }
 }
