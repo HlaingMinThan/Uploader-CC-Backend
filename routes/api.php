@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FileLinkController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PlanController;
@@ -37,4 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/subscriptions/intent', StripePaymentIntentController::class);
     Route::post('/subscriptions/store', [SubscriptionController::class, 'store']);
     Route::patch('/subscriptions/swap', [SubscriptionController::class, 'update']);
+
+    Route::post('/files/{file:uuid}/links', [FileLinkController::class, 'store']);
 });
