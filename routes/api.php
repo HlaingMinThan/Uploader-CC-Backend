@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', LoginController::class);
 Route::get('/plans', [PlanController::class, 'index']);
 
+Route::get('/files/{file::uuid}/get-download-link', FileDownloadController::class);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserController::class, 'show']);
     Route::get('/user/usage', [UserController::class, 'usage']);
@@ -41,5 +43,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/subscriptions/swap', [SubscriptionController::class, 'update']);
 
     Route::post('/files/{file:uuid}/links', [FileLinkController::class, 'store']);
-    Route::get('/files/{file::uuid}/get-download-link', FileDownloadController::class);
 });
