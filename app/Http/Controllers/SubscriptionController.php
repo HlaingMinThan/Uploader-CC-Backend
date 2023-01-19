@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     {
         $request->validate([
             'plan' => ['required', Rule::exists('plans', 'slug')],
-            'token' => 'required',
+            'paymentMethodId' => 'required',
         ]);
 
         if ($request->plan === 'free') {
