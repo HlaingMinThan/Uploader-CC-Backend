@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\FileLinkController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -40,4 +41,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/subscriptions/swap', [SubscriptionController::class, 'update']);
 
     Route::post('/files/{file:uuid}/links', [FileLinkController::class, 'store']);
+    Route::get('/files/{file::uuid}/get-download-link', FileDownloadController::class);
 });
