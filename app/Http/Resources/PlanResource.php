@@ -14,13 +14,16 @@ class PlanResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'name' => $this->name,
             'slug' => $this->slug,
             'price' => $this->price,
             'storage' => $this->storage,
             'free' => !$this->buyable,
-            'can_swap' => $request->user()->canSwap($this)
         ];
+        if ($request->user()) {
+            $data['can_swap'] = $request->user()->canSwap($this);
+        }
+        return $data;
     }
 }
